@@ -32,6 +32,7 @@ const Login = () => {
                     localStorage.setItem("token", realJwt);
 
                     // Navigate to profile page after successful login
+                    if (response.data.roles[0] == "")
                     navigate("/student/profile");
                 }
             }
