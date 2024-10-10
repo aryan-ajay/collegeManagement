@@ -1,0 +1,41 @@
+/* NavBar.css */
+
+
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #000;
+    background: white;
+    border-bottom: 0.1px solid #17900264;
+  }
+  
+  .header-nav .logo {
+    width: 150px;
+    height: auto;
+  }
+  
+  .header-nav .navbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .header-nav .btn-header {
+    padding: 0.8rem 2.5rem;
+    background-color: #00b4d8;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-top-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+  

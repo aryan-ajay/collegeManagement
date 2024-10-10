@@ -1,0 +1,142 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa, #c3e0e5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+.auth-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); 
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin: 3rem auto;
+}
+
+.auth-container:hover {
+    transform: translateY(-5px);
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #0f4c75;
+}
+
+.auth-container input, select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #dfe6e9; 
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9fbfd;
+}
+
+.auth-container input:focus, select:focus {
+    outline: none;
+    border-color: #00b4d8; 
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.3);
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 15px;
+    background-color: #00b4d8; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.auth-container button:hover {
+    background-color: #0077b6; 
+    transform: translateY(-3px); 
+}
+
+.auth-container p {
+    margin-top: 20px;
+    font-size: 17px;
+    color: #555;
+}
+
+.auth-container a {
+    color: #00b4d8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+.auth-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 30px;
+        width: 90%;
+    }
+
+    .auth-container h2 {
+        font-size: 22px;
+    }
+
+    .auth-container input, select, button {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 20px;
+    }
+
+    .auth-container h2 {
+        font-size: 20px;
+    }
+
+    .auth-container input, select, button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .auth-container {
+        width: 500px;
+    }
+
+    .auth-container h2 {
+        font-size: 30px;
+    }
+
+    .auth-container input, select, button {
+        padding: 12px;
+        font-size: 18px;
+    }
+}
