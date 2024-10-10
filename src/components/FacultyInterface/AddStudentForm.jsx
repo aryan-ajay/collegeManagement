@@ -1,82 +1,121 @@
 import React, { useState } from 'react';
-
+import axiosInstance from "../LoginSignup/axios.js";
 
 const AddStudentForm = () => {
-  const [profile, setProfile] = useState({
-    officeHours: '',
-    email: '',
-    phone: '',
-  });
-  const [message, setMessage] = useState(''); // Message state
 
+  // Using individual states for each input field
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [message, setMessage] = useState('');
+  const role = 'student'; // Static role value
+
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfile((prevProfile) => ({
-      ...prevProfile,
-      [name]: value,
-    }));
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const addStudent = async () => {
+    try {
+      const response = await axiosInstance.post("/auth/signup", {
+        email,
+        password,
+        name,
+        role: [role],
+        phone
+      });
+
+      console.log(response.data);
+      if (response && response.data.message === "User created successfully") {
+        console.log("User created successfully");
+        // Show success message after saving
+        setMessage('Profile saved successfully!');
+      }
+
+    } catch (error) {
+      console.error(error);
+      setMessage('Error occurred while saving profile.');
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Simulate saving the profile to the database
-    setTimeout(() => {
-      console.log('Profile saved:', profile);
-
-      // Show success message after saving
-      setMessage('Profile saved successfully!');
-      
-      // Clear the message after 3 seconds
-      setTimeout(() => {
-        setMessage('');
-      }, 3000);
-    }, 1000); // Simulated delay for saving
+    addStudent();
   };
 
   return (
-    <div className="update-profile-form">
-      <h2>Add Student</h2> <br />
-      <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Student Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={profile.email}
-          onChange={handleInputChange}
-          placeholder="Student Email"
-          required
-        />
+      <div className="update-profile-form">
+        <h2>Add Student</h2> <br />
+        <form onSubmit={handleSubmit}>
 
-        <label htmlFor="officeHours">Password :</label>
-        <input
-          type="password"
-          id="officeHours"
-          name="officeHours"
-          value={profile.officeHours}
-          onChange={handleInputChange}
-          placeholder="Password"
-          required
-        />
+          <label htmlFor="fullname">Student Name</label>
+          <input
+              type="text"
+              id="fullname"
+              name="name" // Corrected name attribute
+              value={name} // Use the state value
+              onChange={handleInputChange}
+              placeholder="Enter Full Name"
+              required
+          />
 
-        <label htmlFor="phone">Student Number</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={profile.phone}
-          onChange={handleInputChange}
-          placeholder="Phone"
-          required
-        />
+          <label htmlFor="email">Student Email</label>
+          <input
+              type="email"
+              id="email"
+              name="email" // Corrected name attribute
+              value={email} // Use the state value
+              onChange={handleInputChange}
+              placeholder="Student Email"
+              required
+          />
 
-        <button type="submit">Save</button>
-      </form>
+          <label htmlFor="password">Password </label>
+          <input
+              type="password"
+              id="password"
+              name="password" // Corrected name attribute
+              value={password} // Use the state value
+              onChange={handleInputChange}
+              placeholder="Password"
+              required
+          />
 
-      {/* Display success message */}
-      {message && <p className="success-message">{message}</p>}
-    </div>
+          <label htmlFor="phone">Student Number</label>
+          <input
+              type="tel"
+              id="phone"
+              name="phone" // Corrected name attribute
+              value={phone} // Use the state value
+              onChange={handleInputChange}
+              placeholder="Phone"
+              required
+          />
+
+          <button type="submit">Save</button>
+        </form>
+
+        {/* Display success message */}
+        {message && <p className="success-message">{message}</p>}
+      </div>
   );
 };
 

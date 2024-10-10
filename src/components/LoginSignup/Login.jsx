@@ -6,13 +6,29 @@ const Login = () => {
 
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('Student');
+    const [role, setRole] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Check if the user is already logged in (i.e., token exists in localStorage)
+        const token = localStorage.getItem("token");
 
-    }, []);
+        if (token) {
+
+            // Get roles from localStorage or saved state
+            const roles = JSON.parse(localStorage.getItem("roles"));
+
+            // Redirect based on roles
+            if (roles.includes("ADMIN")) {
+                navigate("/admin/dashboard");
+            } else if (roles.includes("FACULTY_MEMBER")) {
+                navigate("/faculty/profile");
+            } else if (roles.includes("STUDENT")) {
+                navigate("/student/profile");
+            }
+        }
+    }, [navigate]);
 
 
     const login = async () => {
@@ -22,18 +38,28 @@ const Login = () => {
                 password
             });
             console.log(response.data);
-            if (response && response.data) {
-                // Extract JWT from the Authorization header
-                const headerJwt = response.headers["authorization"];
-                if (headerJwt) {
-                    const realJwt = headerJwt.split(" ")[1]; // Get the token part after 'Bearer'
+            const headerJwt = response.headers["authorization"];
+            if (headerJwt) {
+                const realJwt = headerJwt.split(" ")[1];
 
-                    // Store the token in localStorage
-                    localStorage.setItem("token", realJwt);
+                // Store the token in localStorage
+                localStorage.setItem("token", realJwt);
 
-                    // Navigate to profile page after successful login
-                    if (response.data.roles[0] == "")
-                    navigate("/student/profile");
+                // Store roles in localStorage for future use
+                const roles = response.data.roles;
+                localStorage.setItem("roles", JSON.stringify(roles));
+
+                // Extract roles from response.data
+                if (roles && roles.length > 0) {
+                    if (roles.includes("ADMIN")) {
+                        navigate("/admin/dashboard");
+                    } else if (roles.includes("FACULTY_MEMBER")) {
+                        navigate("/faculty/profile");
+                    } else if (roles.includes("STUDENT")) {
+                        navigate("/student/profile");
+                    } else {
+                        navigate("/");
+                    }
                 }
             }
         } catch (error) {

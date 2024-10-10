@@ -12,6 +12,13 @@ function NavBar() {
     setMenuOpen(!menuOpen);
   };
 
+    useEffect(() => {
+        const isToken = localStorage.getItem('token');
+        if (!isToken) {
+            navigate('/login');
+        }
+    }, []);
+
 
   return (
     <>
@@ -19,7 +26,7 @@ function NavBar() {
         <div className="logo-section">
           {/* <img src={logo} alt="Logo" className="logo" /> */}
         </div>
-        <div className="navbar">  
+        <div className="navbar">
           <div className="header-btn">
               <button className="btn-header" onClick={() => navigate('/login')}>Login</button>
           </div>

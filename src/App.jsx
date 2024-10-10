@@ -1,9 +1,9 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Header from './components/Header/Header'; 
+import Header from './components/Header/Header';
 import Login from './components/LoginSignup/Login';
 import Signup from './components/LoginSignup/Signup';
-import './components/LoginSignup/styles.css'; 
+import './components/LoginSignup/styles.css';
 import MainConnecter from './components/Student/MainConnecter';
 import FacultyDashboard from './components/FacultyInterface/FacultyDashboard';
 import Dashboard from './components/Admin/Dashboard';
@@ -35,7 +35,7 @@ const route = createBrowserRouter([
         element: <FacultyDashboard />
       },
       {
-        path: "ajay",
+        path: "admin/dashboard",
         element: <Dashboard />
       }
 

@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import UserTable from './UserTable';
 import DateFilterPopup from './DateFilterPopup';
 import './Application.css';
+import axiosInstance from "../../LoginSignup/axios.js";
 
 const Application = () => {
   const [searchQuery, setSearchQuery] = useState('');
