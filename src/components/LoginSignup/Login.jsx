@@ -20,7 +20,7 @@ const Login = () => {
             const roles = JSON.parse(localStorage.getItem("roles"));
 
             // Redirect based on roles
-            if (roles.includes("ADMIN")) {
+            if (roles.includes("ADMINISTRATOR")) {
                 navigate("/admin/dashboard");
             } else if (roles.includes("FACULTY_MEMBER")) {
                 navigate("/faculty/profile");
@@ -35,7 +35,8 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:8090/api/auth/signin", {
                 email,
-                password
+                password,
+                role: [role],
             });
             console.log(response.data);
             const headerJwt = response.headers["authorization"];
@@ -91,9 +92,9 @@ const Login = () => {
                     required
                 />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-                    <option value="Student">Student</option>
-                    <option value="Faculty Member">Faculty Member</option>
-                    <option value="Administrator">Administrator</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty Member</option>
+                    <option value="admin">Administrator</option>
                 </select>
                 <button type="submit">Login</button>
                 {error && <p className="error">{error}</p>}
